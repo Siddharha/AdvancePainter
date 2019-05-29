@@ -4,6 +4,6 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/root_navigation"
             app:startDestination="@id/stageFragment">
 
-    <fragment android:id="@+id/stageFragment" android:name="in.creativelizard.advancepainter.fragments.StageFragment"
+    <fragment android:id="@+id/stageFragment" android:name="in.creativelizard.advancepainter.fragments.main_fragments.StageFragment"
               android:label="fragment_stage" tools:layout="@layout/fragment_stage"/>
 </navigation>
