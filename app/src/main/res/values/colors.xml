@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#363636</color>
+    <color name="colorPrimaryDark">#242424</color>
+    <color name="colorAccent">#8D8D8D</color>
+    <color name="stage_color">#B6B6B6</color>
+</resources>
