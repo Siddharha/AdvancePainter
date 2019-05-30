@@ -9,7 +9,10 @@ import android.support.v7.widget.Toolbar
 import android.view.*
 import kotlinx.android.synthetic.main.fragment_stage.view.*
 import android.R.menu
-import android.view.MenuInflater
+
+
+
+
 
 
 
@@ -18,6 +21,7 @@ class StageFragment : Fragment() {
 
     lateinit var rootView:View
     lateinit var mToolbar: Toolbar
+    private var isChecked = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,14 +46,17 @@ class StageFragment : Fragment() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+
+        val checkable = menu?.findItem(R.id.mnuDrawSwitch)
+        checkable?.isChecked = isChecked
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.mnuDrawSwitch ->{
-
+                isChecked = !item.isChecked
+                item.isChecked = isChecked
             }
         }
         return false

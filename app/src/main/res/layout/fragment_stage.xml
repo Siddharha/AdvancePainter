@@ -19,7 +19,8 @@
                      app:layout_constraintTop_toBottomOf="@+id/toolbar" android:id="@+id/spMain">
             <in.creativelizard.advancepainter.Utils.PainterCanvas
                     android:layout_width="300dp"
-                    android:layout_height="300dp"/>
+                    android:layout_height="300dp"
+            android:layout_margin="5dp"/>
 
         </in.creativelizard.advancepainter.Utils.StagePainter>
         <FrameLayout

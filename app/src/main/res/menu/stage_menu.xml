@@ -3,5 +3,8 @@
     <item
             android:id="@+id/mnuDrawSwitch"
             android:title="Draw"
-            app:actionLayout="@layout/switch_item" android:visibility="visible"/>
+            android:checkable="true"
+            app:actionLayout="@layout/switch_item"
+            android:visibility="visible"
+            app:showAsAction="always"/>
 </menu>
