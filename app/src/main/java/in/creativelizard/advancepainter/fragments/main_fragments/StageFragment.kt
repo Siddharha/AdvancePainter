@@ -2,26 +2,14 @@ package `in`.creativelizard.advancepainter.fragments.main_fragments
 
 
 import `in`.creativelizard.advancepainter.R
+import `in`.creativelizard.advancepainter.activities.MainActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.Toolbar
+import android.view.*
 import kotlinx.android.synthetic.main.fragment_stage.view.*
-import android.view.MotionEvent
-import android.widget.RelativeLayout
-
-
-
-
-
-
-
-
-
-
-
-
+import android.R.menu
+import android.view.MenuInflater
 
 
 
@@ -29,9 +17,7 @@ import android.widget.RelativeLayout
 class StageFragment : Fragment() {
 
     lateinit var rootView:View
-    private var mXDelta: Int = 0
-    private var mYDelta: Int = 0
-    private var isSingleTouch:Boolean = false
+    lateinit var mToolbar: Toolbar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,7 +36,23 @@ class StageFragment : Fragment() {
     }
 
     private fun initialize() {
+        setHasOptionsMenu(true)
+        mToolbar = rootView.toolbar as Toolbar
+        (context as MainActivity).setSupportActionBar(mToolbar)
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.mnuDrawSwitch ->{
+
+            }
+        }
+        return false
     }
 
 }
