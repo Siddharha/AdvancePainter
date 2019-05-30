@@ -31,6 +31,7 @@ class StageFragment : Fragment() {
     lateinit var rootView:View
     private var mXDelta: Int = 0
     private var mYDelta: Int = 0
+    private var isSingleTouch:Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,34 +43,8 @@ class StageFragment : Fragment() {
     }
 
     private fun onActionPerform() {
-        rootView.flWorkSpace.getChildAt(0)
-            .setOnTouchListener { v, event ->
-                val x = event.rawX.toInt()
-                val y = event.rawY.toInt()
-           when (event.action){
-                MotionEvent.ACTION_DOWN -> {
-                    val lParams = v.layoutParams as RelativeLayout.LayoutParams
-                    mXDelta = x - lParams.leftMargin
-                    mYDelta = y - lParams.topMargin
-
-                    return@setOnTouchListener true
-                }
-
-               MotionEvent.ACTION_MOVE -> {
-                   val layoutParams = v.layoutParams as RelativeLayout.LayoutParams
-                   layoutParams.leftMargin = x - mXDelta
-                   layoutParams.topMargin = y - mYDelta
-                   layoutParams.rightMargin = -250
-                   layoutParams.bottomMargin = -250
-                   v.layoutParams = layoutParams
-
-
-                   return@setOnTouchListener true
-               }
-
-
-           }
-
+        rootView.spMain.getChildAt(0).setOnTouchListener { v, event ->
+            rootView.spMain.init(activity)
             return@setOnTouchListener false
         }
     }

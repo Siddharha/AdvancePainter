@@ -6,28 +6,42 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import android.graphics.Bitmap
+import android.view.MotionEvent
 
 
 
-class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
+
+
+class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, attrs){
     private lateinit var drawPaint:Paint
+
+
     init {
+
         setupPaint()
     }
 
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return false
+
+
+    }
+
+
     private fun setupPaint() {
         drawPaint = Paint()
+        drawPaint.color = Color.RED
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.drawColor(Color.WHITE)
-    }
+        canvas?.drawCircle(10f,10f,10f,drawPaint)
+        canvas?.save()
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
+        canvas?.restore()
+
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

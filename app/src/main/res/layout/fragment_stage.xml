@@ -11,22 +11,17 @@
         <include layout="@layout/toolbar" android:id="@+id/toolbar" app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
 
-        <RelativeLayout android:layout_width="0dp" android:layout_height="0dp"
+        <in.creativelizard.advancepainter.Utils.StagePainter android:layout_width="0dp" android:layout_height="0dp"
                      app:layout_constraintEnd_toEndOf="parent"
                      android:background="@color/stage_color"
-                     app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@+id/toolbar" android:id="@+id/flWorkSpace">
+                     app:layout_constraintBottom_toBottomOf="parent"
+                                                             app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toBottomOf="@+id/toolbar" android:id="@+id/spMain">
             <in.creativelizard.advancepainter.Utils.PainterCanvas
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="5dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"/>
 
-        </RelativeLayout>
+        </in.creativelizard.advancepainter.Utils.StagePainter>
         <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="3dp"
