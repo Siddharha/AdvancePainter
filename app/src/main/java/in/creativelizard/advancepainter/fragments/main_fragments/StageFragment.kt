@@ -8,20 +8,13 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
 import android.view.*
 import kotlinx.android.synthetic.main.fragment_stage.view.*
-import android.R.menu
-
-
-
-
-
-
 
 
 class StageFragment : Fragment() {
 
     lateinit var rootView:View
     lateinit var mToolbar: Toolbar
-    private var isChecked = false
+    private var isDrawingModeChecked = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,14 +42,14 @@ class StageFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu?) {
 
         val checkable = menu?.findItem(R.id.mnuDrawSwitch)
-        checkable?.isChecked = isChecked
+        checkable?.isChecked = isDrawingModeChecked
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.mnuDrawSwitch ->{
-                isChecked = !item.isChecked
-                item.isChecked = isChecked
+                isDrawingModeChecked = !item.isChecked
+                item.isChecked = isDrawingModeChecked
             }
         }
         return false
