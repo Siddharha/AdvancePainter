@@ -51,7 +51,7 @@ class StageFragment : Fragment() {
                 isDrawingModeChecked = !item.isChecked
                 item.isChecked = isDrawingModeChecked
 
-                rootView.pcDrawing.isDrawingMode = isDrawingModeChecked
+                rootView.pcDrawing.isCanvasInDrawMode = isDrawingModeChecked
             }
         }
         return false

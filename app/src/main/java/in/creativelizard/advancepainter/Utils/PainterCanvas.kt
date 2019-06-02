@@ -8,22 +8,16 @@ import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
 import android.view.MotionEvent
-import android.R.attr.path
-
-
-
-
-
-
 
 
 class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, attrs){
     private lateinit var drawPaint:Paint
     private val TOUCH_TOLERANCE = 4f
     lateinit var path:Path
-    var oldX = 0f
-    var oldY = 0f
-    var isDrawingMode = false
+    private var oldX = 0f
+    private var oldY = 0f
+    var isCanvasInDrawMode = false
+    private var DRAWING_MODE = 0 //for Free Drawing.
 
     init {
 
@@ -37,25 +31,34 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
 
         when(event?.action){
             MotionEvent.ACTION_DOWN ->{
+                if(DRAWING_MODE == 0){
                 path.reset()
                 path.moveTo(pointX!!, pointY!!)
                 //path.lineTo(pointX, pointY)
                 oldX = pointX
-                oldY = pointY}
-
-            MotionEvent.ACTION_MOVE ->{
-                val dx = Math.abs(pointX?.minus(oldX)!!)
-                val dy = Math.abs(pointY?.minus(oldY)!!)
-                if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-                    path.quadTo(oldX, oldY, (pointX + oldX) / 2, (pointY + oldY) / 2)
-                    oldX = pointX
-                    oldY = pointY
+                oldY = pointY
                 }
 
+            }
+
+            MotionEvent.ACTION_MOVE ->{
+
+                if(DRAWING_MODE == 0) {
+                    val dx = Math.abs(pointX!! - oldX)
+                    val dy = Math.abs(pointY!! - oldY)
+                    if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+                        path.quadTo(oldX, oldY, (pointX + oldX) / 2, (pointY + oldY) / 2)
+                        oldX = pointX
+                        oldY = pointY
+
+                    }
+
+
+                }
                 invalidate()
             }
         }
-        return isDrawingMode
+        return isCanvasInDrawMode
 
 
     }
@@ -64,18 +67,18 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
     private fun setupPaint() {
         path = Path()
         drawPaint = Paint()
-        drawPaint.color = Color.RED
+        drawPaint.color = Color.BLACK
         drawPaint.strokeWidth = 5f
+
+        drawPaint.isAntiAlias = true
+        drawPaint.style = Paint.Style.STROKE
+        drawPaint.strokeJoin = Paint.Join.ROUND
+        drawPaint.strokeCap = Paint.Cap.ROUND
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.drawColor(Color.WHITE)
-        canvas?.drawCircle(10f,10f,10f,drawPaint)
-        canvas?.save()
-
-        canvas?.restore()
-
         canvas?.drawPath(path, drawPaint)
 
     }
