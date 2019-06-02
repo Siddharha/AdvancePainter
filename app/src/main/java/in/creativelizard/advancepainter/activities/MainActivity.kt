@@ -2,7 +2,9 @@ package `in`.creativelizard.advancepainter.activities
 
 import `in`.creativelizard.advancepainter.R
 import `in`.creativelizard.advancepainter.fragments.main_fragments.StageFragment
+import `in`.creativelizard.advancepainter.fragments.main_fragments.StageViewModel
 import android.app.Dialog
+import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,11 +14,16 @@ import kotlinx.android.synthetic.main.create_new_canvas.*
 
 
 class MainActivity : AppCompatActivity() {
-
+    lateinit var stageViewModel:StageViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initialize()
 
+    }
+
+    private fun initialize() {
+        stageViewModel = ViewModelProviders.of(this).get(StageViewModel::class.java)
     }
 /*
     fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -42,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createNewCanvas(w: String, h: String) {
-
+        stageViewModel.page.value = true
 
     }
 

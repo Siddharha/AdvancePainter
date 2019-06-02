@@ -4,6 +4,8 @@ package `in`.creativelizard.advancepainter.fragments.main_fragments
 import `in`.creativelizard.advancepainter.R
 import `in`.creativelizard.advancepainter.Utils.PainterCanvas
 import `in`.creativelizard.advancepainter.activities.MainActivity
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
@@ -41,6 +43,13 @@ class StageFragment : Fragment() {
         }catch (e:Exception){
             e.printStackTrace()
         }
+        (context as MainActivity).stageViewModel.page.observe(activity!!, Observer { newCanvasPage ->
+            //s.text = s
+            if(newCanvasPage!!){
+
+                createNewCanvas(200,200)
+            }
+        })
     }
 
     private fun initialize() {
