@@ -15,20 +15,20 @@ android:background="@android:color/white">
                    android:background="#00bcd4"
                    android:layout_margin="10dp"/>
     </LinearLayout>
-   <LinearLayout android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:gravity="center_vertical"
-   android:orientation="horizontal">
-       <ImageView android:layout_width="wrap_content"
+    <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:layout_margin="10dp"
-       android:src="@drawable/ic_painting"/>
-       <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:textSize="18sp"
-                 android:textStyle="bold"
-       android:text="New Canvas"/>
-   </LinearLayout>
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal" android:id="@+id/llNewCanvas">
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="10dp"
+                   android:src="@drawable/ic_painting" android:contentDescription="TODO"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="18sp"
+                  android:textStyle="bold"
+                  android:text="New Canvas"/>
+    </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:gravity="center_vertical"
