@@ -27,6 +27,8 @@ public class StagePainter extends LinearLayout implements ScaleGestureDetector.O
 
     private float dx = 0f;
     private float dy = 0f;
+    private float mX = 0f;
+    private float mY = 0f;
     private float prevDx = 0f;
     private float prevDy = 0f;
 
@@ -52,6 +54,11 @@ public class StagePainter extends LinearLayout implements ScaleGestureDetector.O
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
                     case MotionEvent.ACTION_DOWN:
+                        if(((LinearLayout)view).getChildCount()>0) {
+                            mX = ((LinearLayout) view).getChildAt(0).getX() - motionEvent.getRawX();
+                            mY = ((LinearLayout) view).getChildAt(0).getY() - motionEvent.getRawY();
+                        }
+
                         if (scale > MIN_ZOOM) {
                             mode = Mode.DRAG;
                             startX = motionEvent.getX() - prevDx;
@@ -59,6 +66,13 @@ public class StagePainter extends LinearLayout implements ScaleGestureDetector.O
                         }
                         break;
                     case MotionEvent.ACTION_MOVE:
+
+                        ((LinearLayout)view).getChildAt(0).animate()
+                                .x(motionEvent.getRawX() + mX)
+                                .y(motionEvent.getRawY() + mY)
+                                .setDuration(0)
+                                .start();
+
                         if (mode == Mode.DRAG) {
                             dx = motionEvent.getX() - startX;
                             dy = motionEvent.getY() - startY;
@@ -117,8 +131,8 @@ public class StagePainter extends LinearLayout implements ScaleGestureDetector.O
     private void applyScaleAndTranslation() {
         child().setScaleX(scale);
         child().setScaleY(scale);
-        child().setTranslationX(dx);
-        child().setTranslationY(dy);
+       // child().setTranslationX(dx);
+        //child().setTranslationY(dy);
     }
 
     private View child() {
