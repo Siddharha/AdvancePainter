@@ -19,8 +19,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initialize()
-
+       // onActionPerform()
     }
+
+
 
     private fun initialize() {
         stageViewModel = ViewModelProviders.of(this).get(StageViewModel::class.java)
@@ -49,7 +51,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createNewCanvas(w: String, h: String) {
-        stageViewModel.page.value = true
+        val pageHash = HashMap<String,Int>()
+        pageHash.put("width",w.toInt())
+        pageHash.put("height",h.toInt())
+
+        stageViewModel.page.value = pageHash
 
     }
 

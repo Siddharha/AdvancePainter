@@ -35,6 +35,10 @@ class StageFragment : Fragment() {
 
     private fun onActionPerform() {
 
+        mToolbar.setNavigationOnClickListener {
+            rootView.dlMain.openDrawer(Gravity.LEFT)
+        }
+
         try {
             rootView.spMain.getChildAt(0).setOnTouchListener { v, event ->
                 rootView.spMain.init(activity)
@@ -43,30 +47,30 @@ class StageFragment : Fragment() {
         }catch (e:Exception){
             e.printStackTrace()
         }
-        (context as MainActivity).stageViewModel.page.observe(activity!!, Observer { newCanvasPage ->
+        (context as MainActivity).stageViewModel.page.observe(activity!!, Observer { pageHashmap ->
             //s.text = s
-            if(newCanvasPage!!){
-
-                createNewCanvas(200,200)
-            }
+                val w = pageHashmap?.get("width")
+            val h = pageHashmap?.get("height")
+                createNewCanvas(w!!,h!!)
         })
     }
 
     private fun initialize() {
         setHasOptionsMenu(true)
         mToolbar = rootView.toolbar as Toolbar
+        mToolbar.setNavigationIcon(R.drawable.ic_menu)
         (context as MainActivity).setSupportActionBar(mToolbar)
-
     }
 
 
     fun createNewCanvas(w:Int,h:Int){
        // pcDrawing
-
+        rootView.spMain.removeAllViews()
         pcDrawing = PainterCanvas(activity,null)
-        pcDrawing.layoutParams = LinearLayout.LayoutParams(w,
+        val param = LinearLayout.LayoutParams(w,
             h)
-
+        param.setMargins(10,10,10,10)
+        pcDrawing.layoutParams = param
         rootView.spMain.addView(pcDrawing)
     }
 

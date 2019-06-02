@@ -16,7 +16,7 @@ public class StagePainter extends LinearLayout implements ScaleGestureDetector.O
     }
 
     private static final float MIN_ZOOM = 1.0f;
-    private static final float MAX_ZOOM = 4.0f;
+    private static final float MAX_ZOOM = 5.0f;
 
     private Mode mode = Mode.NONE;
     private float scale = 1.0f;

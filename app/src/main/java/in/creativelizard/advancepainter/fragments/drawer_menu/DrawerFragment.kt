@@ -29,6 +29,7 @@ class DrawerFragment : Fragment() {
             (context as MainActivity).createNewCanvasDialog()
         }
 
+
     }
 
 
