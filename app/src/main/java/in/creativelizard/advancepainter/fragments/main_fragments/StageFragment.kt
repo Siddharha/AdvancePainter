@@ -2,6 +2,7 @@ package `in`.creativelizard.advancepainter.fragments.main_fragments
 
 
 import `in`.creativelizard.advancepainter.R
+import `in`.creativelizard.advancepainter.Utils.AppUtil
 import `in`.creativelizard.advancepainter.Utils.PainterCanvas
 import `in`.creativelizard.advancepainter.activities.MainActivity
 import android.arch.lifecycle.Observer
@@ -64,11 +65,14 @@ class StageFragment : Fragment() {
 
 
     fun createNewCanvas(w:Int,h:Int){
+
+        val pxW = AppUtil.convertPixelsToDp(w,activity!!).toInt()
+        val pxH = AppUtil.convertPixelsToDp(h,activity!!).toInt()
        // pcDrawing
         rootView.spMain.removeAllViews()
         pcDrawing = PainterCanvas(activity,null)
-        val param = LinearLayout.LayoutParams(w,
-            h)
+        val param = LinearLayout.LayoutParams(pxW,
+            pxH)
         param.setMargins(10,10,10,10)
         pcDrawing.layoutParams = param
         rootView.spMain.addView(pcDrawing)
