@@ -17,7 +17,8 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
     private var oldX = 0f
     private var oldY = 0f
     var isCanvasInDrawMode = false
-    private var DRAWING_MODE = 0 //for Free Drawing.
+    public var DRAWING_MODE = 0 //for Free Drawing.
+
 
     init {
 
@@ -31,29 +32,31 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
 
         when(event?.action){
             MotionEvent.ACTION_DOWN ->{
-                if(DRAWING_MODE == 0){
-                path.reset()
-                path.moveTo(pointX!!, pointY!!)
-                //path.lineTo(pointX, pointY)
-                oldX = pointX
-                oldY = pointY
-                }
+               when(DRAWING_MODE){
+                   0 ->{
+                       path.reset()
+                       path.moveTo(pointX!!, pointY!!)
+                       //path.lineTo(pointX, pointY)
+                       oldX = pointX
+                       oldY = pointY
+                   }
+               }
 
             }
 
             MotionEvent.ACTION_MOVE ->{
+                when(DRAWING_MODE) {
 
-                if(DRAWING_MODE == 0) {
-                    val dx = Math.abs(pointX!! - oldX)
-                    val dy = Math.abs(pointY!! - oldY)
-                    if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-                        path.quadTo(oldX, oldY, (pointX + oldX) / 2, (pointY + oldY) / 2)
-                        oldX = pointX
-                        oldY = pointY
+                    0->{
+                        val dx = Math.abs(pointX!! - oldX)
+                        val dy = Math.abs(pointY!! - oldY)
+                        if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+                            path.quadTo(oldX, oldY, (pointX + oldX) / 2, (pointY + oldY) / 2)
+                            oldX = pointX
+                            oldY = pointY
 
+                        }
                     }
-
-
                 }
                 invalidate()
             }
