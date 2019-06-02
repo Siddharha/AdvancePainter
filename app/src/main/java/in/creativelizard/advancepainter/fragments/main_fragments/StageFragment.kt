@@ -36,7 +36,7 @@ class StageFragment : Fragment() {
     private fun onActionPerform() {
 
         mToolbar.setNavigationOnClickListener {
-            rootView.dlMain.openDrawer(Gravity.LEFT)
+            rootView.dlMain.openDrawer(Gravity.START)
         }
 
         try {
@@ -72,6 +72,7 @@ class StageFragment : Fragment() {
         param.setMargins(10,10,10,10)
         pcDrawing.layoutParams = param
         rootView.spMain.addView(pcDrawing)
+        rootView.dlMain.closeDrawer(Gravity.START)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?) {

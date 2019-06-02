@@ -27,6 +27,7 @@ class DrawerFragment : Fragment() {
     private fun onActionPerform() {
         rootView.llNewCanvas.setOnClickListener {
             (context as MainActivity).createNewCanvasDialog()
+
         }
 
 

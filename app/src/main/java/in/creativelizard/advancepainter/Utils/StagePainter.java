@@ -91,14 +91,15 @@ public class StagePainter extends LinearLayout implements ScaleGestureDetector.O
                         break;
                 }
                 scaleDetector.onTouchEvent(motionEvent);
-
-                if ((mode == Mode.DRAG && scale >= MIN_ZOOM) || mode == Mode.ZOOM) {
-                    getParent().requestDisallowInterceptTouchEvent(true);
-                    float maxDx = (child().getWidth() - (child().getWidth() / scale)) / 2 * scale;
-                    float maxDy = (child().getHeight() - (child().getHeight() / scale)) / 2 * scale;
-                    dx = Math.min(Math.max(dx, -maxDx), maxDx);
-                    dy = Math.min(Math.max(dy, -maxDy), maxDy);
-                    applyScaleAndTranslation();
+                if(((LinearLayout)view).getChildCount()>0) {
+                    if ((mode == Mode.DRAG && scale >= MIN_ZOOM) || mode == Mode.ZOOM) {
+                        getParent().requestDisallowInterceptTouchEvent(true);
+                        float maxDx = (child().getWidth() - (child().getWidth() / scale)) / 2 * scale;
+                        float maxDy = (child().getHeight() - (child().getHeight() / scale)) / 2 * scale;
+                        dx = Math.min(Math.max(dx, -maxDx), maxDx);
+                        dy = Math.min(Math.max(dy, -maxDy), maxDy);
+                        applyScaleAndTranslation();
+                    }
                 }
 
                 return true;
