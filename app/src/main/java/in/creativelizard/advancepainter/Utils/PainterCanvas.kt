@@ -4,9 +4,13 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
 import android.view.MotionEvent
+import android.R.attr.path
+
+
 
 
 
@@ -15,7 +19,11 @@ import android.view.MotionEvent
 
 class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, attrs){
     private lateinit var drawPaint:Paint
-    public var isDrawingMode = false
+    private val TOUCH_TOLERANCE = 4f
+    lateinit var path:Path
+    var oldX = 0f
+    var oldY = 0f
+    var isDrawingMode = false
 
     init {
 
@@ -23,6 +31,30 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+
+        val pointX = event?.x
+        val pointY = event?.y
+
+        when(event?.action){
+            MotionEvent.ACTION_DOWN ->{
+                path.reset()
+                path.moveTo(pointX!!, pointY!!)
+                //path.lineTo(pointX, pointY)
+                oldX = pointX
+                oldY = pointY}
+
+            MotionEvent.ACTION_MOVE ->{
+                val dx = Math.abs(pointX?.minus(oldX)!!)
+                val dy = Math.abs(pointY?.minus(oldY)!!)
+                if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+                    path.quadTo(oldX, oldY, (pointX + oldX) / 2, (pointY + oldY) / 2)
+                    oldX = pointX
+                    oldY = pointY
+                }
+
+                invalidate()
+            }
+        }
         return isDrawingMode
 
 
@@ -30,8 +62,10 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
 
 
     private fun setupPaint() {
+        path = Path()
         drawPaint = Paint()
         drawPaint.color = Color.RED
+        drawPaint.strokeWidth = 5f
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -41,6 +75,8 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
         canvas?.save()
 
         canvas?.restore()
+
+        canvas?.drawPath(path, drawPaint)
 
     }
 
