@@ -15,7 +15,7 @@ import android.view.MotionEvent
 
 class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, attrs){
     private lateinit var drawPaint:Paint
-
+    public var isDrawingMode = false
 
     init {
 
@@ -23,7 +23,7 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return false
+        return isDrawingMode
 
 
     }

@@ -50,6 +50,8 @@ class StageFragment : Fragment() {
             R.id.mnuDrawSwitch ->{
                 isDrawingModeChecked = !item.isChecked
                 item.isChecked = isDrawingModeChecked
+
+                rootView.pcDrawing.isDrawingMode = isDrawingModeChecked
             }
         }
         return false
