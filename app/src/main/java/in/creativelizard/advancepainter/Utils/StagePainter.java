@@ -66,13 +66,13 @@ public class StagePainter extends LinearLayout implements ScaleGestureDetector.O
                         }
                         break;
                     case MotionEvent.ACTION_MOVE:
-
-                        ((LinearLayout)view).getChildAt(0).animate()
-                                .x(motionEvent.getRawX() + mX)
-                                .y(motionEvent.getRawY() + mY)
-                                .setDuration(0)
-                                .start();
-
+                        if(((LinearLayout)view).getChildCount()>0) {
+                            ((LinearLayout) view).getChildAt(0).animate()
+                                    .x(motionEvent.getRawX() + mX)
+                                    .y(motionEvent.getRawY() + mY)
+                                    .setDuration(0)
+                                    .start();
+                        }
                         if (mode == Mode.DRAG) {
                             dx = motionEvent.getX() - startX;
                             dy = motionEvent.getY() - startY;
