@@ -71,12 +71,12 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
         path = Path()
         drawPaint = Paint()
         drawPaint.color = Color.BLACK
-        drawPaint.strokeWidth = 5f
+        drawPaint.strokeWidth = 1f
 
-        drawPaint.isAntiAlias = true
+        drawPaint.isAntiAlias = false
         drawPaint.style = Paint.Style.STROKE
         drawPaint.strokeJoin = Paint.Join.ROUND
-        drawPaint.strokeCap = Paint.Cap.ROUND
+        drawPaint.strokeCap = Paint.Cap.SQUARE
     }
 
     override fun onDraw(canvas: Canvas?) {
