@@ -1,13 +1,13 @@
 package `in`.creativelizard.advancepainter.Utils
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import android.view.MotionEvent
+import android.graphics.RectF
+
+
 
 
 class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, attrs){
@@ -16,15 +16,23 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
     lateinit var path:Path
     private var oldX = 0f
     private var oldY = 0f
+    lateinit var scaleMatrix:Matrix
+    lateinit var rectF:RectF
     var isCanvasInDrawMode = false
     public var DRAWING_MODE = 0 //for Free Drawing.
 
+    lateinit var mCanvas: Canvas
 
     init {
 
         setupPaint()
     }
 
+     fun setupScaleMatrix(scale:Float){
+        scaleMatrix.setScale(scale, scale,0.5f,0.5f)
+        path.transform(scaleMatrix)
+         mCanvas.restore()
+    }
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
         val pointX = event?.x
@@ -68,10 +76,13 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
 
 
     private fun setupPaint() {
+       scaleMatrix = Matrix()
+        rectF = RectF()
         path = Path()
+        path.computeBounds(rectF, true)
         drawPaint = Paint()
         drawPaint.color = Color.BLACK
-        drawPaint.strokeWidth = 1f
+        drawPaint.strokeWidth = 5f
 
         drawPaint.isAntiAlias = false
         drawPaint.style = Paint.Style.STROKE
@@ -81,8 +92,9 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        canvas?.drawColor(Color.WHITE)
-        canvas?.drawPath(path, drawPaint)
+        mCanvas = canvas!!
+        mCanvas.drawColor(Color.WHITE)
+        mCanvas.drawPath(path, drawPaint)
 
     }
 

@@ -127,9 +127,11 @@ public class StagePainter extends LinearLayout implements ScaleGestureDetector.O
 
     @Override
     public void onScaleEnd(ScaleGestureDetector scaleDetector) {
+        ((PainterCanvas)child()).setupScaleMatrix(scale);
     }
 
     private void applyScaleAndTranslation() {
+
         child().setScaleX(scale);
         child().setScaleY(scale);
        // child().setTranslationX(dx);
