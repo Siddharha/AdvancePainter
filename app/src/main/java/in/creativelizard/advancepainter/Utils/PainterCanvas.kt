@@ -31,8 +31,10 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
      fun setupScaleMatrix(scale:Float){
         scaleMatrix.setScale(scale, scale,0.5f,0.5f)
         path.transform(scaleMatrix)
+
          mCanvas.restore()
     }
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
         val pointX = event?.x
