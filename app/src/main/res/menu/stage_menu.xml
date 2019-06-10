@@ -7,4 +7,7 @@
             app:actionLayout="@layout/switch_item"
             android:visibility="visible"
             app:showAsAction="always"/>
+    <item android:id="@+id/mnuSave"
+    app:showAsAction="ifRoom"
+    android:title="Save"/>
 </menu>

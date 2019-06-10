@@ -5,6 +5,7 @@ import `in`.creativelizard.advancepainter.R
 import `in`.creativelizard.advancepainter.Utils.AppUtil
 import `in`.creativelizard.advancepainter.Utils.PainterCanvas
 import `in`.creativelizard.advancepainter.activities.MainActivity
+import android.app.Dialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_stage.view.*
+import kotlinx.android.synthetic.main.save_image.*
 import java.lang.Exception
 
 
@@ -97,8 +99,18 @@ class StageFragment : Fragment() {
                     Toast.makeText(activity!!,"Please Create a Canvas First!",Toast.LENGTH_SHORT).show()
                 }
             }
+
+            R.id.mnuSave ->{saveImagePopup()}
         }
         return false
+    }
+
+    private fun saveImagePopup() {
+        val d = Dialog(activity!!)
+        d.setContentView(R.layout.save_image)
+        d.btnSave.setOnClickListener {
+            val fileName = d.etFileName.text.toString()
+        }
     }
 
 }
