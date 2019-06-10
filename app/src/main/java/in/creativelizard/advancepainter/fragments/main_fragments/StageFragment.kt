@@ -17,6 +17,8 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_stage.view.*
 import kotlinx.android.synthetic.main.save_image.*
 import java.lang.Exception
+import android.graphics.Bitmap
+import android.graphics.Canvas
 
 
 class StageFragment : Fragment() {
@@ -26,6 +28,8 @@ class StageFragment : Fragment() {
     lateinit var mToolbar: Toolbar
     private var isDrawingModeChecked = false
     lateinit var pcDrawing: PainterCanvas
+     var pageW:Int = 0
+     var pageH:Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,9 +56,9 @@ class StageFragment : Fragment() {
         }
         (context as MainActivity).stageViewModel.page.observe(activity!!, Observer { pageHashmap ->
             //s.text = s
-                val w = pageHashmap?.get("width")
-            val h = pageHashmap?.get("height")
-                createNewCanvas(w!!,h!!)
+                 pageW = pageHashmap?.get("width")!!
+             pageH = pageHashmap?.get("height")!!
+                createNewCanvas(pageW,pageH)
         })
     }
 
@@ -110,7 +114,13 @@ class StageFragment : Fragment() {
         d.setContentView(R.layout.save_image)
         d.btnSave.setOnClickListener {
             val fileName = d.etFileName.text.toString()
+
+           /* val bitmap = Bitmap.createBitmap(pageW, pageH, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)*/
+
+
         }
+        d.show()
     }
 
 }
