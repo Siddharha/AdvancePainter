@@ -70,7 +70,7 @@ class StageFragment : Fragment() {
     }
 
 
-    fun createNewCanvas(w:Int,h:Int){
+    val createNewCanvas:(Int,Int)->Unit = {w,h ->
 
         val pxW = AppUtil.convertPixelsToDp(w,activity!!).toInt()
         val pxH = AppUtil.convertPixelsToDp(h,activity!!).toInt()

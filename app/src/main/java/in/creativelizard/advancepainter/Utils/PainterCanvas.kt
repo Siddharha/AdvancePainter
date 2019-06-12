@@ -28,8 +28,8 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
         setupPaint()
     }
 
-     fun setupScaleMatrix(scale:Float){
-        scaleMatrix.setScale(scale, scale,0.5f,0.5f)
+     fun setupScaleMatrix(f: Float): (Float) ->Unit = {
+        scaleMatrix.setScale(it, it,0.5f,0.5f)
         path.transform(scaleMatrix)
 
          mCanvas.restore()
