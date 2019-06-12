@@ -8,8 +8,7 @@ import android.util.DisplayMetrics
 class AppUtil {
 
 companion object{
-    fun convertPixelsToDp(px : Int, context : Context):Float{
-        return px / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
-    }
+    val convertPixelsToDp : ( Int, Context) -> Float = {px,c ->
+        px / (c.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT) }
 }
 }
