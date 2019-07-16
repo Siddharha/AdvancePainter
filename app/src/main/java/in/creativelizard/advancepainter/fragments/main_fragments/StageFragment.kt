@@ -105,6 +105,10 @@ class StageFragment : Fragment() {
             }
 
             R.id.mnuSave ->{saveImagePopup()}
+            R.id.mnuUndo ->{pcDrawing.pathArrayList.removeAt(pcDrawing.pathArrayList.size-1)
+                pcDrawing.path.reset()
+            pcDrawing.invalidate()
+            }
         }
         return false
     }

@@ -1,16 +1,18 @@
 package `in`.creativelizard.advancepainter.Utils
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import android.view.MotionEvent
 import android.graphics.RectF
+import android.util.Log
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
-
-
-class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, attrs){
+class PainterCanvas(context: Activity?, attrs: AttributeSet?) : View(context, attrs){
     private lateinit var drawPaint:Paint
     private val TOUCH_TOLERANCE = 4f
     lateinit var path:Path
@@ -21,6 +23,7 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
     var isCanvasInDrawMode = false
     public var DRAWING_MODE = 0 //for Free Drawing.
 
+    lateinit var pathArrayList: ArrayList<Path>
     lateinit var mCanvas: Canvas
 
     init {
@@ -44,7 +47,7 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
             MotionEvent.ACTION_DOWN ->{
                when(DRAWING_MODE){
                    0 ->{
-                       path.reset()
+                       //path.reset()
                        path.moveTo(pointX!!, pointY!!)
                        //path.lineTo(pointX, pointY)
                        oldX = pointX
@@ -70,6 +73,12 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
                 }
                 invalidate()
             }
+            MotionEvent.ACTION_UP ->{
+                val _localPath = Path()
+                _localPath.addPath(path)
+                pathArrayList.add(_localPath)
+                path.reset()
+            }
         }
         return isCanvasInDrawMode
 
@@ -90,13 +99,20 @@ class PainterCanvas(context: Context?, attrs: AttributeSet?) : View(context, att
         drawPaint.style = Paint.Style.STROKE
         drawPaint.strokeJoin = Paint.Join.ROUND
         drawPaint.strokeCap = Paint.Cap.SQUARE
+        pathArrayList = ArrayList()
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         mCanvas = canvas!!
         mCanvas.drawColor(Color.WHITE)
-        mCanvas.drawPath(path, drawPaint)
+        mCanvas.drawPath(path,drawPaint)
+        for(pth in pathArrayList){
+        mCanvas.drawPath(pth, drawPaint)
+        }
+
+
+
 
     }
 
