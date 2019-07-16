@@ -24,6 +24,7 @@ class PainterCanvas(context: Activity?, attrs: AttributeSet?) : View(context, at
     public var DRAWING_MODE = 0 //for Free Drawing.
 
     lateinit var pathArrayList: ArrayList<Path>
+    lateinit var pathRedoList:ArrayList<Path>
     lateinit var mCanvas: Canvas
 
     init {
@@ -100,6 +101,7 @@ class PainterCanvas(context: Activity?, attrs: AttributeSet?) : View(context, at
         drawPaint.strokeJoin = Paint.Join.ROUND
         drawPaint.strokeCap = Paint.Cap.SQUARE
         pathArrayList = ArrayList()
+        pathRedoList = ArrayList()
     }
 
     override fun onDraw(canvas: Canvas?) {

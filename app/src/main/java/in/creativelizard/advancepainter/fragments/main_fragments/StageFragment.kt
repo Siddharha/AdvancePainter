@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.save_image.*
 import java.lang.Exception
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Path
 
 
 class StageFragment : Fragment() {
@@ -105,9 +106,12 @@ class StageFragment : Fragment() {
             }
 
             R.id.mnuSave ->{saveImagePopup()}
-            R.id.mnuUndo ->{pcDrawing.pathArrayList.removeAt(pcDrawing.pathArrayList.size-1)
-                pcDrawing.path.reset()
+            R.id.mnuUndo ->{pcDrawing.pathArrayList.pushTo(pcDrawing.pathRedoList,pcDrawing.pathArrayList.size-1)
             pcDrawing.invalidate()
+            }
+            R.id.mnuRedo ->{
+                pcDrawing.pathRedoList.pushTo(pcDrawing.pathArrayList,pcDrawing.pathRedoList.size-1)
+                pcDrawing.invalidate()
             }
         }
         return false
@@ -127,4 +131,11 @@ class StageFragment : Fragment() {
         d.show()
     }
 
+}
+
+fun ArrayList<Path>.pushTo(pathArray:ArrayList<Path>, index:Int){
+    if(this.size>0) {
+        pathArray.add(this[index])
+        this.removeAt(index)
+    }
 }
