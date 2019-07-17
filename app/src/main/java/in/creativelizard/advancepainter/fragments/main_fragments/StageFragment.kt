@@ -102,6 +102,7 @@ class StageFragment : Fragment() {
                     pcDrawing.isCanvasInDrawMode = isDrawingModeChecked
                 }catch (e:Exception){
                     Toast.makeText(activity!!,"Please Create a Canvas First!",Toast.LENGTH_SHORT).show()
+                    pcDrawing.isCanvasInDrawMode = false
                 }
             }
 
