@@ -18,6 +18,8 @@ class PainterCanvas(context: Activity?, attrs: AttributeSet?) : View(context, at
     lateinit var path:Path
     private var oldX = 0f
     private var oldY = 0f
+    private var lastX = 0f
+    private var lastY = 0f
     lateinit var scaleMatrix:Matrix
     lateinit var rectF:RectF
     var isCanvasInDrawMode = false
@@ -54,6 +56,14 @@ class PainterCanvas(context: Activity?, attrs: AttributeSet?) : View(context, at
                        oldX = pointX
                        oldY = pointY
                    }
+
+                   1 ->{
+                       //path.reset()
+                       //path.lineTo(pointX, pointY)
+                       oldX = pointX!!
+                       oldY = pointY!!
+                       path.moveTo(oldX, oldY)
+                   }
                }
 
             }
@@ -70,6 +80,21 @@ class PainterCanvas(context: Activity?, attrs: AttributeSet?) : View(context, at
                             oldY = pointY
 
                         }
+                    }
+
+                    1->{
+                       // val dx = Math.abs(pointX!! - oldX)
+                       // val dy = Math.abs(pointY!! - oldY)
+                        lastX = pointX!!
+                        lastY = pointY!!
+                       // if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+                        path.reset()
+                        path.moveTo(oldX,oldY)
+                            path.lineTo(lastX,lastY)
+                          //  oldX = pointX
+                           // oldY = pointY
+
+                       // }
                     }
                 }
                 invalidate()
