@@ -61,6 +61,14 @@ class StageFragment : Fragment() {
              pageH = pageHashmap?.get("height")!!
                 createNewCanvas(pageW,pageH)
         })
+
+        rootView.btnPencil.setOnClickListener {
+            pcDrawing.DRAWING_MODE = 0
+        }
+
+        rootView.btnLine.setOnClickListener {
+            pcDrawing.DRAWING_MODE = 1
+        }
     }
 
     private fun initialize() {
@@ -68,6 +76,8 @@ class StageFragment : Fragment() {
         mToolbar = rootView.toolbar as Toolbar
         mToolbar.setNavigationIcon(R.drawable.ic_menu)
         (context as MainActivity).setSupportActionBar(mToolbar)
+
+
     }
 
 
